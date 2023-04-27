@@ -18,8 +18,8 @@ export const defaultTheme = {
     white: '#FFFFFF',
   },
   fonts: {
-    baloo: 'Baloo 2, cursive',
+    baloo: `'Baloo 2', cursive`,
     roboto: 'Roboto, sans-serif',
   },
   pixelToRem: (size: number) => `${size / 16}rem`,
-}
+} as const
