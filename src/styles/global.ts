@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font-family: ${props => props.theme.fonts.roboto};
+    font-family: ${(props) => props.theme.fonts.roboto};
     font-weight: 400;
     font-size: 1rem;
   }
