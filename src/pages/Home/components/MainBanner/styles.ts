@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import backgroundImage from '../../../../assets/images/pages/home/background.png'
 
-export const Section = styled.div`
+export const Section = styled.section`
   background: url(${backgroundImage}) no-repeat center/cover;
 `
 export const MainContainer = styled.div`
