@@ -27,7 +27,7 @@ export function CoffeeCard({
     .format(price)
     .replace('R$', '')
 
-  const [quantityProduct, setQuantityProduct] = useState(0)
+  const [quantityProduct, setQuantityProduct] = useState(1)
 
   function handleIncrementQuantity() {
     setQuantityProduct((prevState) => prevState + 1)
@@ -36,7 +36,7 @@ export function CoffeeCard({
   function handleDecrementQuantity() {
     setQuantityProduct((prevState) => prevState - 1)
   }
-  const isButtonEnable = quantityProduct < 1
+  const isButtonEnable = quantityProduct <= 1
   return (
     <CoffeeCardContainer>
       <img src={image} alt={name} />
@@ -62,12 +62,13 @@ export function CoffeeCard({
               value={quantityProduct}
               onChange={(e) => setQuantityProduct(Number(e.target.value))}
               name="quantityProduct"
+              min={1}
             />
             <button onClick={handleIncrementQuantity} title="Adding Item">
               <img src={plusIcon} alt="Subtraction" />
             </button>
           </div>
-          <button>
+          <button title="Add to cart">
             <ShoppingCartSimple weight="fill" size={22} />
           </button>
         </AddToCartContainer>
