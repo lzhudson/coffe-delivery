@@ -54,7 +54,7 @@ export const CoffeeCardFooter = styled.footer`
   }
 `
 
-export const AddToCartContainer = styled.div`
+export const AddToCartContainer = styled.form`
   display: flex;
   gap: 8px;
   max-width: 118px;
@@ -76,6 +76,9 @@ export const AddToCartContainer = styled.div`
       width: 14px;
       height: 14px;
       cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
     input[type='number'] {
       width: 20px;
