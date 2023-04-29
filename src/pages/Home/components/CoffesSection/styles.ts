@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CoffeeSectionContainer = styled.section`
   padding-bottom: ${(props) => props.theme.pixelToRem(157)};
+  margin-top: 2rem;
   .container {
     width: 100%;
     max-width: 1120px;
