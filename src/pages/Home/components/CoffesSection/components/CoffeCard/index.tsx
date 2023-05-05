@@ -7,9 +7,8 @@ import {
   AddToCartContainer,
 } from './style'
 
-import subtractionIcon from '../../../../../../assets/images/subtraction.svg'
-import plusIcon from '../../../../../../assets/images/plus.svg'
-import { useState } from 'react'
+// import { useState } from 'react'
+import { CounterInput } from '../../../../../../components/CounterInput'
 
 interface CoffeCardProps extends Coffe {}
 
@@ -27,16 +26,20 @@ export function CoffeeCard({
     .format(price)
     .replace('R$', '')
 
-  const [quantityProduct, setQuantityProduct] = useState(1)
+  // const [quantityProduct, setQuantityProduct] = useState(1)
 
-  function handleIncrementQuantity() {
-    setQuantityProduct((prevState) => prevState + 1)
-  }
+  // function onIncrementQuantity() {
+  //   setQuantityProduct((prevState) => prevState + 1)
+  // }
 
-  function handleDecrementQuantity() {
-    setQuantityProduct((prevState) => prevState - 1)
-  }
-  const isButtonEnable = quantityProduct <= 1
+  // function onDecrementQuantity() {
+  //   setQuantityProduct((prevState) => prevState - 1)
+  // }
+
+  // function onChangeProductQuantity(quantity: number) {
+  //   setQuantityProduct(quantity)
+  // }
+
   return (
     <CoffeeCardContainer>
       <img src={image} alt={name} />
@@ -49,25 +52,12 @@ export function CoffeeCard({
           <strong>{priceFormatted}</strong>
         </span>
         <AddToCartContainer>
-          <div>
-            <button
-              onClick={handleDecrementQuantity}
-              disabled={isButtonEnable}
-              title="Subtraction Item"
-            >
-              <img src={subtractionIcon} alt="Subtraction" />
-            </button>
-            <input
-              type="number"
-              value={quantityProduct}
-              onChange={(e) => setQuantityProduct(Number(e.target.value))}
-              name="quantityProduct"
-              min={1}
-            />
-            <button onClick={handleIncrementQuantity} title="Adding Item">
-              <img src={plusIcon} alt="Subtraction" />
-            </button>
-          </div>
+          <CounterInput
+          // onDecrementQuantity={onDecrementQuantity}
+          // onIncrementQuantity={onIncrementQuantity}
+          // quantityProduct={quantityProduct}
+          // onChangeProductQuantity={onChangeProductQuantity}
+          />
           <button title="Add to cart">
             <ShoppingCartSimple weight="fill" size={22} />
           </button>
