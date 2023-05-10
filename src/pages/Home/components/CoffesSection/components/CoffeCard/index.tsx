@@ -10,6 +10,7 @@ import {
 import { CounterInput } from '../../../../../../components/CounterInput'
 import React, { useContext, useState } from 'react'
 import { CartContext } from '../../../../../../context/CartContext'
+import { formatPriceWithoutCurrencySymbol } from '../../../../../../utils/format'
 
 interface CoffeCardProps extends Coffe {}
 
@@ -22,12 +23,6 @@ export function CoffeeCard({
   price,
 }: CoffeCardProps) {
   const { addProduct } = useContext(CartContext)
-  const priceFormatted = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
-    .format(price)
-    .replace('R$', '')
 
   const [quantityProduct, setQuantityProduct] = useState(1)
 
@@ -71,7 +66,7 @@ export function CoffeeCard({
       <CoffeeCardFooter>
         <span>
           R$
-          <strong>{priceFormatted}</strong>
+          <strong>{formatPriceWithoutCurrencySymbol(price)}</strong>
         </span>
         <AddToCartContainer onSubmit={(e) => handleAddProductInCart(e)}>
           <CounterInput
