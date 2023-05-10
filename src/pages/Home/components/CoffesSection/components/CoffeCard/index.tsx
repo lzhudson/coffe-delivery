@@ -7,18 +7,21 @@ import {
   AddToCartContainer,
 } from './style'
 
-// import { useState } from 'react'
 import { CounterInput } from '../../../../../../components/CounterInput'
+import React, { useContext, useState } from 'react'
+import { CartContext } from '../../../../../../context/CartContext'
 
 interface CoffeCardProps extends Coffe {}
 
 export function CoffeeCard({
+  id,
   image,
   tags,
   name,
   description,
   price,
 }: CoffeCardProps) {
+  const { addProduct } = useContext(CartContext)
   const priceFormatted = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -26,19 +29,38 @@ export function CoffeeCard({
     .format(price)
     .replace('R$', '')
 
-  // const [quantityProduct, setQuantityProduct] = useState(1)
+  const [quantityProduct, setQuantityProduct] = useState(1)
 
-  // function onIncrementQuantity() {
-  //   setQuantityProduct((prevState) => prevState + 1)
-  // }
+  function onIncrementQuantity() {
+    setQuantityProduct((prevState) => prevState + 1)
+  }
 
-  // function onDecrementQuantity() {
-  //   setQuantityProduct((prevState) => prevState - 1)
-  // }
+  function onDecrementQuantity() {
+    setQuantityProduct((prevState) => prevState - 1)
+  }
 
-  // function onChangeProductQuantity(quantity: number) {
-  //   setQuantityProduct(quantity)
-  // }
+  function onChangeProductQuantity(quantity: number) {
+    setQuantityProduct(quantity)
+  }
+
+  function resetInputQuantity() {
+    setQuantityProduct(1)
+  }
+
+  function handleAddProductInCart(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const product = {
+      id,
+      image,
+      tags,
+      name,
+      description,
+      price,
+      quantity: quantityProduct,
+    }
+    addProduct(product)
+    resetInputQuantity()
+  }
 
   return (
     <CoffeeCardContainer>
@@ -51,12 +73,12 @@ export function CoffeeCard({
           R$
           <strong>{priceFormatted}</strong>
         </span>
-        <AddToCartContainer>
+        <AddToCartContainer onSubmit={(e) => handleAddProductInCart(e)}>
           <CounterInput
-          // onDecrementQuantity={onDecrementQuantity}
-          // onIncrementQuantity={onIncrementQuantity}
-          // quantityProduct={quantityProduct}
-          // onChangeProductQuantity={onChangeProductQuantity}
+            onDecrementQuantity={onDecrementQuantity}
+            onIncrementQuantity={onIncrementQuantity}
+            quantityProduct={quantityProduct}
+            onChangeProductQuantity={onChangeProductQuantity}
           />
           <button title="Add to cart">
             <ShoppingCartSimple weight="fill" size={22} />
