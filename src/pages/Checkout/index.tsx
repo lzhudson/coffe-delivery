@@ -15,8 +15,11 @@ import { AddressFields } from './components/AddressFields'
 import { PaymentSelect } from './components/PaymentSelect'
 import { CardProductCart } from './components/CardProductCart'
 import { Summary } from './components/Summary'
+import { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
 
 export function Checkout() {
+  const { products } = useContext(CartContext)
   return (
     <CheckoutSection>
       <CheckoutSectionContainer>
@@ -39,12 +42,17 @@ export function Checkout() {
             <h4>Café Selecioandos</h4>
             <CartContainer>
               <ProductList>
-                <ProductItem>
-                  <CardProductCart />
-                </ProductItem>
-                <ProductItem>
-                  <CardProductCart />
-                </ProductItem>
+                {products.map((product) => (
+                  <ProductItem key={product.id}>
+                    <CardProductCart
+                      price={product.price}
+                      name={product.name}
+                      image={product.image}
+                      quantity={product.quantity}
+                      id={product.id}
+                    />
+                  </ProductItem>
+                ))}
               </ProductList>
               <Summary />
               <PurchaseButton type="submit">Confirmar Pedido</PurchaseButton>
