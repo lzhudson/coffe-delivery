@@ -5,8 +5,12 @@ import {
   PaymentSelectHeader,
   RadioContainer,
 } from './style'
+import { useFormContext } from 'react-hook-form'
+import { AddAddressFormValidationFormData } from '../..'
 
 export function PaymentSelect() {
+  const { register } = useFormContext<AddAddressFormValidationFormData>()
+
   return (
     <PaymentSelectContainer>
       <PaymentSelectHeader>
@@ -23,8 +27,8 @@ export function PaymentSelect() {
           <input
             type="radio"
             id="credit-card"
-            name="payment-option"
             value="credit-card"
+            {...register('paymentType')}
           />
           <label htmlFor="credit-card">
             <CreditCard weight="regular" size={16} /> Cartão de Crédito
@@ -35,8 +39,8 @@ export function PaymentSelect() {
           <input
             type="radio"
             id="debit-card"
-            name="payment-option"
             value="debit-card"
+            {...register('paymentType')}
           />
           <label htmlFor="debit-card">
             <Bank weight="regular" size={16} />
@@ -45,7 +49,12 @@ export function PaymentSelect() {
         </RadioContainer>
 
         <RadioContainer>
-          <input type="radio" id="money" name="payment-option" value="money" />
+          <input
+            type="radio"
+            id="money"
+            value="money"
+            {...register('paymentType')}
+          />
           <label htmlFor="money">
             <Money weight="regular" size={16} />
             Dinheiro
