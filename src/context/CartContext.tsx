@@ -100,7 +100,6 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function updateOrderInfo(orderInfo: OrderInfo) {
-    console.log(orderInfo)
     setOrderInfo(orderInfo)
   }
 

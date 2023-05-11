@@ -49,9 +49,7 @@ export function Checkout() {
     handleSubmit,
     formState: { errors },
   } = addAddressForm
-  console.log(errors)
   function handleFinishOrder(data: AddAddressFormValidationFormData) {
-    console.log(data)
     updateOrderInfo(data)
   }
 

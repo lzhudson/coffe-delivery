@@ -1,12 +1,15 @@
+import { useSummary } from '../../../../hooks/useSummary'
+import { formatPriceWithoutCurrencySymbol } from '../../../../utils/format'
 import { SummaryTable } from './style'
 
 export function Summary() {
+  const summary = useSummary()
   return (
     <SummaryTable>
       <tbody>
         <tr>
           <td>Total de itens</td>
-          <td>R$ 29,70</td>
+          <td>R$ {formatPriceWithoutCurrencySymbol(summary)}</td>
         </tr>
         <tr>
           <td>Entrega</td>
@@ -14,7 +17,7 @@ export function Summary() {
         </tr>
         <tr>
           <td>Total</td>
-          <td>R$ 33,20</td>
+          <td>R$ {formatPriceWithoutCurrencySymbol(summary + 3.5)}</td>
         </tr>
       </tbody>
     </SummaryTable>
