@@ -10,13 +10,28 @@ export interface Product {
   quantity: number
 }
 
+interface OrderInfo {
+  address: {
+    zipcode: string
+    street: string
+    number: string
+    complement: string
+    neighborhood: string
+    city: string
+    federativeUnity: string
+  }
+  paymentType: 'credit-card' | 'debit-card' | 'money'
+}
+
 interface ProductInput extends Product {
   quantity: number
 }
 
 interface CartContextProps {
+  orderInfo: OrderInfo
   products: Product[]
   addProduct: (product: ProductInput) => void
+  updateOrderInfo: (orderInfo: OrderInfo) => void
   updateProductQuantity: (productId: number, quantity: number) => void
 }
 
@@ -36,6 +51,8 @@ export function CartProvider({ children }: CartProviderProps) {
     }
     return []
   })
+
+  const [orderInfo, setOrderInfo] = useState({} as OrderInfo)
 
   function addProduct(product: ProductInput) {
     const productInput = product
@@ -74,14 +91,33 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   }
 
+  function updateOrderInfo(orderInfo: OrderInfo) {
+    console.log(orderInfo)
+    setOrderInfo(orderInfo)
+  }
+
   useEffect(() => {
     const productsJSON = JSON.stringify(products)
     localStorage.setItem('@coffee-delivery:products-state-1.0.0', productsJSON)
   }, [products])
 
+  useEffect(() => {
+    const orderInfoJSON = JSON.stringify(orderInfo)
+    localStorage.setItem(
+      '@coffee-delivery:order-info-state-1.0.0',
+      orderInfoJSON,
+    )
+  }, [orderInfo])
+
   return (
     <CartContext.Provider
-      value={{ products, addProduct, updateProductQuantity }}
+      value={{
+        orderInfo,
+        products,
+        addProduct,
+        updateProductQuantity,
+        updateOrderInfo,
+      }}
     >
       {children}
     </CartContext.Provider>
