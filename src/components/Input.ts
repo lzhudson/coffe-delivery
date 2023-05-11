@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InputContainer = styled.input`
+export const Input = styled.input`
   background-color: transparent;
   border: none;
   padding: 12px;
