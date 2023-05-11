@@ -17,13 +17,48 @@ import { CardProductCart } from './components/CardProductCart'
 import { Summary } from './components/Summary'
 import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
+import { FormProvider, useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const addAddressFormValidationSchema = zod.object({
+  address: zod.object({
+    zipcode: zod.string(),
+    street: zod.string(),
+    number: zod.string(),
+    complement: zod.string(),
+    neighborhood: zod.string(),
+    city: zod.string(),
+    federativeUnity: zod.string(),
+  }),
+  paymentType: zod.enum(['credit-card', 'debit-card', 'money']),
+})
+
+export type AddAddressFormValidationFormData = zod.infer<
+  typeof addAddressFormValidationSchema
+>
 
 export function Checkout() {
-  const { products } = useContext(CartContext)
+  const { products, updateOrderInfo } = useContext(CartContext)
+
+  const addAddressForm = useForm<AddAddressFormValidationFormData>({
+    resolver: zodResolver(addAddressFormValidationSchema),
+  })
+
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = addAddressForm
+  console.log(errors)
+  function handleFinishOrder(data: AddAddressFormValidationFormData) {
+    console.log(data)
+    updateOrderInfo(data)
+  }
+
   return (
     <CheckoutSection>
       <CheckoutSectionContainer>
-        <CheckoutContent>
+        <CheckoutContent onSubmit={handleSubmit(handleFinishOrder)}>
           <AddressContent>
             <h4>Complete seu pedido</h4>
             <div>
@@ -34,9 +69,13 @@ export function Checkout() {
                   <p>Informe o endereço onde deseja receber seu pedido</p>
                 </div>
               </AddressContentHeader>
-              <AddressFields />
+              <FormProvider {...addAddressForm}>
+                <AddressFields />
+              </FormProvider>
             </div>
-            <PaymentSelect />
+            <FormProvider {...addAddressForm}>
+              <PaymentSelect />
+            </FormProvider>
           </AddressContent>
           <Cart>
             <h4>Café Selecioandos</h4>
