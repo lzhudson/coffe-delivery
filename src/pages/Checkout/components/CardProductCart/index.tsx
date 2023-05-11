@@ -20,7 +20,7 @@ export function CardProductCart({
   price,
   quantity,
 }: CardProductCartProps) {
-  const { updateProductQuantity } = useContext(CartContext)
+  const { updateProductQuantity, deleteProduct } = useContext(CartContext)
   const [quantityProduct, setQuantityProduct] = useState(quantity)
 
   function onIncrementQuantity() {
@@ -34,6 +34,11 @@ export function CardProductCart({
   function onChangeProductQuantity(quantity: number) {
     setQuantityProduct(quantity)
   }
+
+  function handleDeleteProduct(productId: number) {
+    deleteProduct(productId)
+  }
+
   useEffect(() => {
     updateProductQuantity(id, quantityProduct)
   }, [quantityProduct])
@@ -51,7 +56,11 @@ export function CardProductCart({
               onIncrementQuantity={onIncrementQuantity}
               quantityProduct={quantityProduct}
             />
-            <ButtonRemoveFromCart type="button">
+            <ButtonRemoveFromCart
+              type="button"
+              onClick={() => handleDeleteProduct(id)}
+              title="Deletar"
+            >
               <Trash size={16} weight="regular" />
               Remover
             </ButtonRemoveFromCart>
