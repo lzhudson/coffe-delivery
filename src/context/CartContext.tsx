@@ -32,6 +32,7 @@ interface CartContextProps {
   products: Product[]
   addProduct: (product: ProductInput) => void
   updateOrderInfo: (orderInfo: OrderInfo) => void
+  deleteProduct: (product: number) => void
   updateProductQuantity: (productId: number, quantity: number) => void
 }
 
@@ -91,6 +92,13 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   }
 
+  function deleteProduct(productId: number) {
+    const productsUpdated = products.filter(
+      (product) => product.id !== productId,
+    )
+    setProducts(productsUpdated)
+  }
+
   function updateOrderInfo(orderInfo: OrderInfo) {
     console.log(orderInfo)
     setOrderInfo(orderInfo)
@@ -117,6 +125,7 @@ export function CartProvider({ children }: CartProviderProps) {
         addProduct,
         updateProductQuantity,
         updateOrderInfo,
+        deleteProduct,
       }}
     >
       {children}
