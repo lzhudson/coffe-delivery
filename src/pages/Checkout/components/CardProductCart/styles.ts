@@ -51,6 +51,10 @@ export const ButtonRemoveFromCart = styled.button`
   align-items: center;
   gap: 0.25rem;
   cursor: pointer;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: ${(props) => props.theme.colors['base-hover']};
+  }
   svg {
     color: ${(props) => props.theme.colors.purple};
   }
