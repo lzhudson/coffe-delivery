@@ -1,4 +1,4 @@
-import { MapPin } from 'phosphor-react'
+import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import {
   OrderInfoContainer,
   OrderInfoContent,
@@ -6,8 +6,21 @@ import {
   OrderItemInfoPayment,
   OrderItemInfoTime,
 } from './style'
+import { useContext } from 'react'
+import { CartContext } from '../../../../context/CartContext'
+
+const PAYMENT_TYPE_TEXT = {
+  'credit-card': 'Cartão de Crédito',
+  'debit-card': 'Cartão de Débito',
+  money: 'Dinheiro',
+}
 
 export function OrderInfo() {
+  const { orderInfo } = useContext(CartContext)
+  const {
+    address: { street, number, city, neighborhood, federativeUnity },
+    paymentType,
+  } = orderInfo
   return (
     <OrderInfoContainer>
       <OrderInfoContent>
@@ -16,14 +29,17 @@ export function OrderInfo() {
             <MapPin weight="fill" size={16} />
           </div>
           <p>
-            Entrega em Rua <strong>João Daniel Martinelli, 102 </strong>
+            Entrega em Rua{' '}
+            <strong>
+              {street}, {number}{' '}
+            </strong>
             <br />
-            Farrapos - Porto Alegre, RS
+            {neighborhood} - {city}, {federativeUnity}
           </p>
         </OrderItemInfoLocal>
         <OrderItemInfoTime>
           <div className="icon-container">
-            <MapPin weight="fill" size={16} />
+            <Timer weight="fill" size={16} />
           </div>
           <p>
             Previsão de entrega <br />
@@ -32,11 +48,11 @@ export function OrderInfo() {
         </OrderItemInfoTime>
         <OrderItemInfoPayment>
           <div className="icon-container">
-            <MapPin weight="fill" size={16} />
+            <CurrencyDollar weight="regular" size={16} />
           </div>
           <p>
             Pagamento na entrega <br />
-            <strong>Cartão de Crédito</strong>
+            <strong>{PAYMENT_TYPE_TEXT[paymentType]}</strong>
           </p>
         </OrderItemInfoPayment>
       </OrderInfoContent>
