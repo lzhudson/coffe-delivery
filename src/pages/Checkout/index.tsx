@@ -20,6 +20,7 @@ import { CartContext } from '../../context/CartContext'
 import { FormProvider, useForm } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from 'react-router-dom'
 
 const addAddressFormValidationSchema = zod.object({
   address: zod.object({
@@ -40,17 +41,15 @@ export type AddAddressFormValidationFormData = zod.infer<
 
 export function Checkout() {
   const { products, updateOrderInfo } = useContext(CartContext)
-
+  const navigate = useNavigate()
   const addAddressForm = useForm<AddAddressFormValidationFormData>({
     resolver: zodResolver(addAddressFormValidationSchema),
   })
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = addAddressForm
+  const { handleSubmit } = addAddressForm
   function handleFinishOrder(data: AddAddressFormValidationFormData) {
     updateOrderInfo(data)
+    navigate('/success')
   }
 
   return (
