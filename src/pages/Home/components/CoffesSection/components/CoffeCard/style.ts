@@ -104,6 +104,11 @@ export const AddToCartContainer = styled.form`
     border: none;
     padding: 8px;
     cursor: pointer;
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: ${(props) => props.theme.colors.purple};
+    }
+
     svg {
       color: ${(props) => props.theme.colors.white};
     }

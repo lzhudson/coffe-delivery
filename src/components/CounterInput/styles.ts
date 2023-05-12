@@ -16,6 +16,12 @@ export const CounterInputContainer = styled.div`
     width: 14px;
     height: 14px;
     cursor: pointer;
+    svg {
+      color: ${(props) => props.theme.colors.purple};
+    }
+    &:hover svg {
+      color: ${(props) => props.theme.colors['purple-dark']};
+    }
     &:disabled {
       cursor: not-allowed;
     }

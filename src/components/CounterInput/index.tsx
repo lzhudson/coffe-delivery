@@ -1,6 +1,5 @@
-import subtractionIcon from '../../assets/images/subtraction.svg'
-import plusIcon from '../../assets/images/plus.svg'
 import { CounterInputContainer } from './styles'
+import { Minus, Plus } from 'phosphor-react'
 
 interface CounterInputProps {
   onIncrementQuantity: () => void
@@ -32,7 +31,7 @@ export function CounterInput({
         disabled={isButtonEnable}
         title="Subtraction Item"
       >
-        <img src={subtractionIcon} alt="Subtraction" />
+        <Minus weight="bold" />
       </button>
       <input
         type="number"
@@ -46,7 +45,7 @@ export function CounterInput({
         onClick={handleIncrementQuantity}
         title="Adding Item"
       >
-        <img src={plusIcon} alt="Subtraction" />
+        <Plus weight="bold" />
       </button>
     </CounterInputContainer>
   )

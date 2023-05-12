@@ -75,7 +75,7 @@ export function Checkout() {
             </FormProvider>
           </AddressContent>
           <Cart>
-            <h4>Café Selecioandos</h4>
+            <h4>Café Selecionados</h4>
             <CartContainer>
               <ProductList>
                 {products.map((product) => (
