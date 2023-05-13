@@ -5,8 +5,8 @@ import { useContext } from 'react'
 import { CartContext } from '../../../context/CartContext'
 import { NavLink } from 'react-router-dom'
 export function Header() {
-  const { products } = useContext(CartContext)
-  const productQuantity = products.length
+  const { productsState } = useContext(CartContext)
+  const productQuantity = productsState.length || 0
 
   return (
     <header>
