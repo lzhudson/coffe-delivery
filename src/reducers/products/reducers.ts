@@ -1,7 +1,6 @@
 import { Product } from '../../context/CartContext'
 import { ActionTypes } from './actions'
 export function productsReducer(currentCartState: Product[], action: any) {
-  console.log(action)
   switch (action.type) {
     case ActionTypes.ADD_PRODUCT: {
       const cart = [...currentCartState]

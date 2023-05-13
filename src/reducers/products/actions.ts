@@ -49,7 +49,6 @@ export function updateQuantityProductAction(
 }
 
 export function removeProductAction(productId: number) {
-  console.log('removeproductaction', productId)
   return {
     type: ActionTypes.REMOVE_PRODUCT,
     payload: {
