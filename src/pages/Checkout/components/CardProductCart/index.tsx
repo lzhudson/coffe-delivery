@@ -9,7 +9,7 @@ import {
 } from './styles'
 import { CartContext, Product } from '../../../../context/CartContext'
 import { formatPriceWithoutCurrencySymbol } from '../../../../utils/format'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 type CardProductCartProps = Omit<Product, 'description' | 'tags'>
 
@@ -20,28 +20,27 @@ export function CardProductCart({
   price,
   quantity,
 }: CardProductCartProps) {
-  const { updateProductQuantity, deleteProduct } = useContext(CartContext)
-  const [quantityProduct, setQuantityProduct] = useState(quantity)
-
+  const {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+    updateProductQuantity,
+    deleteProduct,
+  } = useContext(CartContext)
   function onIncrementQuantity() {
-    setQuantityProduct((prevState) => prevState + 1)
+    increaseProductQuantity(id, 1)
   }
 
   function onDecrementQuantity() {
-    setQuantityProduct((prevState) => prevState - 1)
+    decreaseProductQuantity(id, -1)
   }
 
   function onChangeProductQuantity(quantity: number) {
-    setQuantityProduct(quantity)
+    updateProductQuantity(id, quantity)
   }
 
   function handleDeleteProduct(productId: number) {
     deleteProduct(productId)
   }
-
-  useEffect(() => {
-    updateProductQuantity(id, quantityProduct)
-  }, [quantityProduct])
 
   return (
     <CardProductCartContainer>
@@ -54,7 +53,7 @@ export function CardProductCart({
               onChangeProductQuantity={onChangeProductQuantity}
               onDecrementQuantity={onDecrementQuantity}
               onIncrementQuantity={onIncrementQuantity}
-              quantityProduct={quantityProduct}
+              quantityProduct={quantity}
             />
             <ButtonRemoveFromCart
               type="button"
