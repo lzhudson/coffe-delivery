@@ -40,7 +40,7 @@ export type AddAddressFormValidationFormData = zod.infer<
 >
 
 export function Checkout() {
-  const { products, updateOrderInfo } = useContext(CartContext)
+  const { productsState, updateOrderInfo } = useContext(CartContext)
   const navigate = useNavigate()
   const addAddressForm = useForm<AddAddressFormValidationFormData>({
     resolver: zodResolver(addAddressFormValidationSchema),
@@ -51,7 +51,6 @@ export function Checkout() {
     updateOrderInfo(data)
     navigate('/success')
   }
-
   return (
     <CheckoutSection>
       <CheckoutSectionContainer>
@@ -78,7 +77,7 @@ export function Checkout() {
             <h4>Café Selecionados</h4>
             <CartContainer>
               <ProductList>
-                {products.map((product) => (
+                {productsState.map((product) => (
                   <ProductItem key={product.id}>
                     <CardProductCart
                       price={product.price}
