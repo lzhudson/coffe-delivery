@@ -13,3 +13,11 @@ export const Input = styled.input`
     outline: 1px solid ${(props) => props.theme.colors['yellow-dark']};
   }
 `
+
+export const InputRoot = styled.div`
+  background-color: ${(props) => props.theme.colors['base-input']};
+  border: 1px solid ${(props) => props.theme.colors['base-button']};
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+`
