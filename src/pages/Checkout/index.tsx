@@ -24,15 +24,17 @@ import { useNavigate } from 'react-router-dom'
 
 const addAddressFormValidationSchema = zod.object({
   address: zod.object({
-    zipcode: zod.string(),
-    street: zod.string(),
-    number: zod.string(),
+    zipcode: zod.string().nonempty('CEP é obrigatório'),
+    street: zod.string().nonempty('Rua é obrigatório'),
+    number: zod.string().nonempty('Número é obrigatório'),
     complement: zod.string(),
-    neighborhood: zod.string(),
-    city: zod.string(),
-    federativeUnity: zod.string(),
+    neighborhood: zod.string().nonempty('Bairro é obrigatório'),
+    city: zod.string().nonempty('Cidade é obrigatório'),
+    federativeUnity: zod.string().nonempty('UF é obrigatório'),
   }),
-  paymentType: zod.enum(['credit-card', 'debit-card', 'money']),
+  paymentType: zod.enum(['credit-card', 'debit-card', 'money'], {
+    errorMap: () => ({ message: 'Selecione o tipo de pagamento' }),
+  }),
 })
 
 export type AddAddressFormValidationFormData = zod.infer<
@@ -76,21 +78,28 @@ export function Checkout() {
           <Cart>
             <h4>Café Selecionados</h4>
             <CartContainer>
-              <ProductList>
-                {productsState.map((product) => (
-                  <ProductItem key={product.id}>
-                    <CardProductCart
-                      price={product.price}
-                      name={product.name}
-                      image={product.image}
-                      quantity={product.quantity}
-                      id={product.id}
-                    />
-                  </ProductItem>
-                ))}
-              </ProductList>
+              {productsState.length ? (
+                <ProductList>
+                  {productsState.map((product) => (
+                    <ProductItem key={product.id}>
+                      <CardProductCart
+                        price={product.price}
+                        name={product.name}
+                        image={product.image}
+                        quantity={product.quantity}
+                        id={product.id}
+                      />
+                    </ProductItem>
+                  ))}
+                </ProductList>
+              ) : (
+                <p className="empty-cart-message">Sem produtos no carrinho</p>
+              )}
+
               <Summary />
-              <PurchaseButton type="submit">Confirmar Pedido</PurchaseButton>
+              <PurchaseButton disabled={!productsState.length} type="submit">
+                Confirmar Pedido
+              </PurchaseButton>
             </CartContainer>
           </Cart>
         </CheckoutContent>
