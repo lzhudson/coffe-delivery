@@ -82,6 +82,11 @@ export const CartContainer = styled.div`
   @media (max-width: 1024px) {
     padding: 20px;
   }
+
+  .empty-cart-message {
+    font-weight: 700;
+    text-align: center;
+  }
 `
 
 export const ProductList = styled.ul`
@@ -114,5 +119,9 @@ export const PurchaseButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: ${(props) => props.theme.colors['yellow-dark']};
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 `
