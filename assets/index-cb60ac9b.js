@@ -832,4 +832,4 @@ Error generating stack: `+o.message+`
     font-weight: 400;
     font-size: 1rem;
   }
-`;function qk(){return g.jsx(i2,{children:g.jsxs(Uv,{theme:Kk,children:[g.jsx(ig,{children:g.jsx(Gk,{})}),g.jsx(Xk,{})]})})}Jl.createRoot(document.getElementById("root")).render(g.jsx(a.StrictMode,{children:g.jsx(qk,{})}));
+`;function qk(){return g.jsx(i2,{children:g.jsxs(Uv,{theme:Kk,children:[g.jsx(ig,{basename:{}.PUBLIC_URL,children:g.jsx(Gk,{})}),g.jsx(Xk,{})]})})}Jl.createRoot(document.getElementById("root")).render(g.jsx(a.StrictMode,{children:g.jsx(qk,{})}));
