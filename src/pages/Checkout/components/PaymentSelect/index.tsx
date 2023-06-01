@@ -7,9 +7,13 @@ import {
 } from './style'
 import { useFormContext } from 'react-hook-form'
 import { AddAddressFormValidationFormData } from '../..'
+import { Feedback } from '../../../../components/Feedback'
 
 export function PaymentSelect() {
-  const { register } = useFormContext<AddAddressFormValidationFormData>()
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<AddAddressFormValidationFormData>()
 
   return (
     <PaymentSelectContainer>
@@ -61,6 +65,9 @@ export function PaymentSelect() {
           </label>
         </RadioContainer>
       </PaymentOptionsContainer>
+      {errors.paymentType?.message && (
+        <Feedback>{errors.paymentType.message}</Feedback>
+      )}
     </PaymentSelectContainer>
   )
 }
