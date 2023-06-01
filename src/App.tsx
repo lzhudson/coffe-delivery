@@ -8,7 +8,7 @@ export function App() {
   return (
     <CartProvider>
       <ThemeProvider theme={defaultTheme}>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.PUBLIC_URL}>
           <Router />
         </BrowserRouter>
         <GlobalStyle />
