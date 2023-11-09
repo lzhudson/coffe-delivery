@@ -5,6 +5,6 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [react()],
-    ...(env.NODE_ENV !== 'development' && { base: '/cofee-delivery' }),
+    ...(env.NODE_ENV !== 'development' && { base: '/coffee-delivery' }),
   }
 })
